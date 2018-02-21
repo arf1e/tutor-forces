@@ -1,0 +1,27 @@
+.main-navigation {
+}
+
+.main-navigation__list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0;
+}
+
+.main-navigation__link {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.main-navigation__element {
+  text-align: center;
+}
+
+@media (min-width: $tablet-width) {
+  .main-navigation {
+    width: auto;
+  }
+
+
+}

@@ -1,0 +1,17 @@
+mixin eventForm(event = {})
+  h2.content__heading Edit event
+  form(action="/events/add", method="POST" class="form")
+    div.form__field
+      label(for="name") Name
+      input(type="text", name="name")
+    div.form__field
+      label(for="date") Date
+      - 
+        const date = new Date();
+        let month = date.getMonth() + 1;
+        if (month < 10) {
+          month = `0${month}`;
+        } 
+        const dateString = `${date.getFullYear()}-${month}-${date.getDate()}`;
+      input(type="date", name="date", min=`${dateString}`)
+    input(type="submit" value="Submit" class="button")

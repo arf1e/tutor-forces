@@ -1,4 +1,18 @@
 .content {
   display: flex;
   justify-content: center;
+  padding: 15px;
 }
+
+.content__heading {
+  text-align: center;
+}
+
+.content__inner {
+  width: 290px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+}
+

@@ -5,6 +5,8 @@ block content
   a(href="/events/add") Add new event
   section.events
     ul.events__list
-      li.event
-        p потом это всё напишу, мне пока нужен лист
+      each event in events
+       li.event
+         a(href=`${event.slug}`) #{event.name}
+
   

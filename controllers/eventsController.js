@@ -19,3 +19,9 @@ exports.createEvent = async (req, res) => {
   req.flash('success', 'Created new event');
   res.redirect(`/events/${event.slug}`);
 }
+
+exports.getEvents = async(req, res) => {
+  const events = await Event.find();
+  console.log(events);
+  res.render('events', {'pageName': 'Events', events});
+}

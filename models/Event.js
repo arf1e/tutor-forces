@@ -5,7 +5,8 @@ const tl = require('transliteration');
 const eventSchema = new mongoose.Schema({
   name: {
     type: String,
-    trim: true
+    trim: true,
+    required: true
   },
   date: {
     type: Date,

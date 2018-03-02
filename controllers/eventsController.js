@@ -22,6 +22,18 @@ exports.createEvent = async (req, res) => {
 
 exports.getEvents = async(req, res) => {
   const events = await Event.find();
-  console.log(events);
   res.render('events', {'pageName': 'Events', events});
+}
+
+exports.editEvent = async(req, res) => {
+  const event = await Event.findOne({_id: req.params.id});
+  res.render('editEvent', {'pageName': `Edit ${event.name}`, event});
+}
+
+exports.updateEvent = async(req, res) => {
+  const event = await Event.findOneAndUpdate({_id: req.params.id}, req.body, {
+    new: true,
+    runValidators: true
+  }).exec();
+  res.redirect('/events');
 }

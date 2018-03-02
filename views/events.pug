@@ -8,5 +8,7 @@ block content
       each event in events
        li.event
          a(href=`${event.slug}`) #{event.name}
+         br
+         a(href=`/events/${event._id}/edit`) Edit event
 
   

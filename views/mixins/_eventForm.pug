@@ -1,17 +1,19 @@
 mixin eventForm(event = {})
   h2.content__heading Edit event
-  form(action="/events/add", method="POST" class="form")
+  form(action=`/events/add/${event._id || ''}`, method="POST" class="form")
     div.form__field
       label(for="name") Name
-      input(type="text", name="name")
+      input(type="text", name="name", required, value=event.name)
     div.form__field
       label(for="date") Date
       - 
-        const date = new Date();
-        let month = date.getMonth() + 1;
-        if (month < 10) {
-          month = `0${month}`;
-        } 
-        const dateString = `${date.getFullYear()}-${month}-${date.getDate()}`;
-      input(type="date", name="date", min=`${dateString}`)
+        const getDate = (date) => {
+          return [...date.toISOString()].splice(0, 10).join('');
+        }
+        let eventDate;
+        if (event.date) {
+          eventDate = getDate(new Date(event.date));
+        }
+        const todayString = getDate(new Date());
+      input(type="date", name="date", min=todayString, required, value=eventDate)
     input(type="submit" value="Submit" class="button")

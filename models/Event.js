@@ -12,7 +12,20 @@ const eventSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  location: String,
+  location: {
+    type: {
+      type: String,
+      default: 'Point'
+    }, 
+    coordinates: [{
+      type: Number,
+      required: 'Provide coordinates of the event please'
+    }],
+    address: {
+      type: String,
+      required: 'Supply an address please'
+    }
+  },
   description: String,
   slug: String
 });

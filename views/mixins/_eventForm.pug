@@ -15,5 +15,11 @@ mixin eventForm(event = {})
           eventDate = getDate(new Date(event.date));
         }
         const todayString = getDate(new Date());
-      input(type="date", name="date", min=todayString, required, value=eventDate)
+      input(type="date", name="date" id="date", min=todayString, required, value=eventDate)
+      label(for="address") Address:
+      input(type="text" name="location[address]" id="address" value=(event.location && event.location.address))
+      label(for="lng") Lng:
+      input(type="text" name="location[coordinates][0]]" id="lng" value=(event.location && event.location[coordinates][0]) required)
+      label(for="lat") Lat:
+      input(type="text" name="location[coordinates][1]" id="lat" value=(event.location && event.location[coordinates][0]) required)
     input(type="submit" value="Submit" class="button")

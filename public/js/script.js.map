@@ -1,0 +1,1 @@
+{"version":3,"sources":["script.js"],"names":[],"mappings":";;AAAA;;;;;;AAEA","file":"script.js","sourcesContent":["import autocomplete from './modules/autocomplete';\n\nautocomplete();"]}

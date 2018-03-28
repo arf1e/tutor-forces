@@ -1,6 +1,6 @@
 mixin eventForm(event = {})
   h2.content__heading Edit event
-  form(action=`/events/add/${event._id || ''}`, method="POST" class="form")
+  form(action=`/events/add/${event._id || ''}`, method="POST" class="form" enctype="multipart/form-data")
     div.form__field
       label(for="name") Name
       input(type="text", name="name", required, value=event.name)
@@ -18,8 +18,13 @@ mixin eventForm(event = {})
       input(type="date", name="date" id="date", min=todayString, required, value=eventDate)
       label(for="address") Address:
       input(type="text" name="location[address]" id="address" value=(event.location && event.location.address))
-      label(for="lng") Lng:
-      input(type="text" name="location[coordinates][0]]" id="lng" value=(event.location && event.location[coordinates][0]) required)
-      label(for="lat") Lat:
-      input(type="text" name="location[coordinates][1]" id="lat" value=(event.location && event.location[coordinates][0]) required)
+      input(type="hidden" name="location[coordinates][0]" id="lng" value=(event.location && event.location.coordinates[0]))
+      input(type="hidden" name="location[coordinates][1]" id="lat" value=(event.location && event.location.coordinates[1]))
+      label(for="description") Description:
+      textarea(name="description" id="description")= event.description
+    div.form__field
+      input(type="file" name="photo" accept="image/jpeg, image/png, image/gif")
+      if event.photo
+        img(src=`/uploads/${event.photo}`, alt=event.name, width="200")
+
     input(type="submit" value="Submit" class="button")

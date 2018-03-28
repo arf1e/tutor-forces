@@ -6,7 +6,6 @@ function autocomplete(input, latInput, lngInput) {
     const place = dropdown.getPlace();
     latInput.value = place.geometry.location.lat();
     lngInput.value = place.geometry.location.lng();
-    input.value = place;
   });
 
   // Когда юзер жмет энтер при выборе автокомплита, не отправлять всю форму при этом:

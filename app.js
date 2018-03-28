@@ -5,6 +5,10 @@ const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
 const routes = require('./routes/index');
+const expressValidator = require('express-validator');
+const errorHandlers = require('./handlers/errorHandlers');
+const passport = require('passport');
+require('./handlers/passport');
 
 // creating Express app
 const app = express();
@@ -12,6 +16,8 @@ const app = express();
 // body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(expressValidator());
 
 // view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -28,15 +34,23 @@ app.use(session({
   saveUninitialized: false
 }));
 
+// passport js
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
 
 app.use((req, res, next) => {
   res.locals.flashes = req.flash();
+  res.locals.user = req.user || null;
   next();
 });
 
 // routing middleware
 app.use('/', routes);
+
+// 404
+app.use(errorHandlers.notFound);
 
 
 // exporting

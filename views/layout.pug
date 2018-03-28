@@ -18,6 +18,8 @@ html(lang="en")
             a.main-navigation__link(href="/news") News 
           li.main-navigation__element
             a.main-navigation__link(href="/events") Events
+        if user
+          p you`re logged as #{`${user.firstName} ${user.lastName}`}
 
     block messages
       if locals.flashes
@@ -36,5 +38,5 @@ html(lang="en")
       .main-footer__inner
         p footer
 
-    script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
+    script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places&language=en`)
     script(src="/dist/App.bundle.js")

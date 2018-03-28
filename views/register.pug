@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  form.form(action="/register" method="POST")
+    div.form__field
+      strong.form__role I want to register as...
+      label(for="tutor").form__radio Tutor
+      input(type="radio" name="role" value="tutor" id="tutor")
+      label(for="student").form__radio Student
+      input(type="radio" name="role" value="student" id="student" checked)
+    div.form__field
+      label(for="first-name") First Name:
+      input(type="first-name" name="firstName" id="first-name" required)
+    div.form__field
+      label(for="last-name") Last Name:
+      input(type="last-name" name="lastName" id="last-name" required)
+    div.form__field
+      label(for="email") Email:
+      input(type="email" name="email" id="email" required)
+    div.form__field
+      label(for="password") Password:
+      input(type="password" name="password" id="password" required)
+    div.form__field
+      label(for="confirm-password") Confirm Password:
+      input(type="password" name="confirm-password" id="confirm-password" required)
+    input(type="submit" value="Register")

@@ -7,7 +7,9 @@ block content
     ul.events__list
       each event in events
        li.event
-         a(href=`${event.slug}`) #{event.name}
+         img(src=`/uploads/${event.photo}` width="200") 
+         br
+         a(href=`/events/${event.slug}`) #{event.name}
          br
          a(href=`/events/${event._id}/edit`) Edit event
 

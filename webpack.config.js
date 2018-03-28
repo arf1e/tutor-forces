@@ -14,7 +14,7 @@ const javascript = {
   test: /\.(js)$/, // удобнее было бы через *, но почему-то низя
   use: [{
     loader: 'babel-loader',
-    options: { presets: ['env'] }
+    options: { presets: ['env'] } 
   }],
 };
 
@@ -55,6 +55,7 @@ const config = {
     new ExtractTextPlugin('style.css')
   ],
   mode: 'development'
+  // TODO: Исправить предупреждение энтрипойнт андефайнд || сделать даунгрейд до третьего вебпака
 };
 
 process.noDeprecation = true;

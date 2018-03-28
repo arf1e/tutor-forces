@@ -27,15 +27,29 @@ const eventSchema = new mongoose.Schema({
     }
   },
   description: String,
-  slug: String
+  slug: String,
+  photo: String
 });
 
-eventSchema.pre('save', function(next){
+eventSchema.pre('save', async function(next){
   if (!this.isModified('name')) {
     next();
     return;
   }
   this.slug = tl.slugify(this.name);
+  //=== Если ивенты создаются с одинаковым именем 
+  
+  // 1. Создаём паттерн для поиска таких ивентов: 
+  const slugRegExp = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
+
+  // 2. Ищем ивенты, совпадающие по паттерну (через this.constructor, так как здесь еще нет схемы Event)
+  const eventsWithSlug = await this.constructor.find({ slug: slugRegExp });
+
+  // 3. Если таковые нашлись, создаём уникальный слаг для нового ивента:
+  if(eventsWithSlug.length) {
+    this.slug = `${this.slug}-${storesWithSlug.length + 1}`;
+  }
+
   next();
 })
 

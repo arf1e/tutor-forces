@@ -5,9 +5,11 @@
 @import "blocks/main-navigation.scss";
 @import "blocks/form.scss";
 @import "blocks/flashes.scss";
+@import "blocks/events.scss";
 
 body {
   font-family: 'Monospace', serif;
   margin: 0;
   padding: 0;
+  min-width: 320px;
 }

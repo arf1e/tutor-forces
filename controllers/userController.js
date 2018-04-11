@@ -3,11 +3,20 @@ const User = mongoose.model('User');
 const promisify = require('es6-promisify');
 
 exports.getLoginForm = (req, res) => {
+  if (req.user) {
+    console.log(req.user.role);
+    res.redirect('/');
+  } else {
   res.render('login');
+  }
 }
 
 exports.getRegisterForm = (req, res) => {
-  res.render('register');
+  if (req.user) {
+    res.redirect('/');
+  } else {
+    res.render('register');
+  }
 }
 
 exports.validateRegister = (req, res, next) => {
@@ -24,6 +33,7 @@ exports.validateRegister = (req, res, next) => {
   req.checkBody('password', 'Password cannot be blank!').notEmpty();
   req.checkBody('confirm-password', 'Confirm your password!').notEmpty();
   req.checkBody('confirm-password', 'Oops! Your passwords do not match!').equals(req.body.password);
+  req.checkBody('role').notEmpty();
 
   const errors = req.validationErrors();
   if (errors) {
@@ -35,7 +45,7 @@ exports.validateRegister = (req, res, next) => {
 };
 
 exports.createUser = async (req, res, next) => {
-  const user = new User({email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName });
+  const user = new User({email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName, role: req.body.role });
   const register = promisify(User.register, User);
   await register(user, req.body.password);
   // dat boi gonna hash password |^

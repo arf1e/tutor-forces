@@ -26,9 +26,10 @@ router.post('/events/add/:id',
 router.get('/events/:slug', eventsController.renderEvent);
 
 router.get('/login', userController.getLoginForm);
+router.post('/login', authController.login);
 router.get('/register', userController.getRegisterForm);
-
 router.post('/register', userController.validateRegister, userController.createUser, authController.login);
+router.get('/logout', authController.logout);
 
 
 module.exports = router;

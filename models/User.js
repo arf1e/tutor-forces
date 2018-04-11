@@ -24,6 +24,10 @@ const userSchema = new Schema({
     type: String,
     required: 'Introduce yourself please!',
     trim: true
+  },
+  role: {
+    type: String,
+    required: 'Provide your role please!'
   }
 });
 
